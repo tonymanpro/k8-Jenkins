@@ -1,0 +1,18 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: tls-ms-websockets
+  annotations:
+    ingress.gcp.kubernetes.io/pre-shared-cert: 'impesa-net-2020'
+    ingress.kubernetes.io/force-ssl-redirect: "true"
+    ingress.kubernetes.io/rewrite-target: /
+    ingress.kubernetes.io/secure-backends: "true"
+spec:
+  rules:
+  - host: wsdev.impesa.net
+    http:
+      paths:
+      - path:
+        backend:
+          serviceName: ms-websockets-service
+          servicePort: 80
